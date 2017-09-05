@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { User } = require('../db/models');
 
 // Dummy route
 router.get('/', (req, res, next) => {

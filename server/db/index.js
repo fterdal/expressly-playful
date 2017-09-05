@@ -11,11 +11,17 @@ const db = new Sequelize(connectionString, {
   native: true,
 })
 
-// console.log('db', db);
-
 const models = require('./models');
 
+function sync() {
+  return db.sync({force: true})
+  .then(`Synced models to db ${databaseName}`)
+  .catch(err => {
+    console.error('Unable to sync database. Are you sure the database exists?')
+    console.error(`Try running \`createdb ${databaseName}\` and see if that fixes the problem.`)
+  });
+}
 
-db.didSync = db.sync({force: true});
+db.didSync = sync();
 
 module.exports = db;

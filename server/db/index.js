@@ -13,8 +13,11 @@ const db = new Sequelize(connectionString, {
 
 const models = require('./models');
 
+// Should we reset the database on restart?
+const force = false;
+
 function sync() {
-  return db.sync({force: true})
+  return db.sync({force})
   .then(`Synced models to db ${databaseName}`)
   .catch(err => {
     console.error('Unable to sync database. Are you sure the database exists?')
